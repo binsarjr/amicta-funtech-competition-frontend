@@ -17,6 +17,7 @@ specifiers:
   prettier-plugin-svelte: ^2.7.0
   svelte: ^3.46.0
   svelte-check: ^2.7.1
+  svelte-french-toast: ^1.0.3
   svelte-local-storage-store: ^0.3.1
   svelte-modals: ^1.2.0
   svelte-preprocess: ^4.10.7
@@ -27,6 +28,7 @@ specifiers:
   vite-plugin-svelte-svg: ^2.0.2
 
 dependencies:
+  svelte-french-toast: 1.0.3_svelte@3.53.1
   svelte-local-storage-store: 0.3.1_svelte@3.53.1
   svelte-modals: 1.2.0
   vite-plugin-svelte-svg: 2.0.2_svelte@3.53.1+vite@3.2.4
@@ -1842,6 +1844,14 @@ packages:
       - sugarss
     dev: true
 
+  /svelte-french-toast/1.0.3_svelte@3.53.1:
+    resolution: {integrity: sha512-HBdutlqUx5FroucvcmMJstmTJDedXayiOSXubBYW6iL5x1PdHp+bOflGx5NxsOa6+EQckJnnVv1vJYgGsg7ngQ==}
+    dependencies:
+      svelte-writable-derived: 2.1.5_svelte@3.53.1
+    transitivePeerDependencies:
+      - svelte
+    dev: false
+
   /svelte-hmr/0.15.1_svelte@3.53.1:
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -1915,6 +1925,14 @@ packages:
       svelte: 3.53.1
       typescript: 4.9.3
     dev: true
+
+  /svelte-writable-derived/2.1.5_svelte@3.53.1:
+    resolution: {integrity: sha512-g26/W1iWj7FlLwaggNwXxHwMSf70/bHAYcpBT/EijijjakCSU9/PXmn31fL/kw2P1SzVEU6ayyCFuNYqTY3RUw==}
+    peerDependencies:
+      svelte: ^3.2.1
+    dependencies:
+      svelte: 3.53.1
+    dev: false
 
   /svelte/3.53.1:
     resolution: {integrity: sha512-Q4/hHkktZogGhN5iqxqSi9sjEVoe/NbIxX4hXEHoasTxj+TxEQVAq66LnDMdAZxjmsodkoI5F3slqsS68U7FNw==}

@@ -3,6 +3,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import { Modals, closeModal } from 'svelte-modals';
 	import { fade } from 'svelte/transition';
+	import { Toaster } from 'svelte-french-toast';
 </script>
 
 <Modals>
@@ -11,6 +12,7 @@
 </Modals>
 <Header />
 <slot />
+<Toaster />
 
 <style>
 	.backdrop {

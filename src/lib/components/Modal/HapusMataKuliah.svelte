@@ -7,6 +7,7 @@
 	import { page } from '$app/stores';
 	import { jadwal } from '../../store/jadwal';
 	import type { Day } from '../../../types';
+	import toast from 'svelte-french-toast';
 	// provided by Modals
 	export let isOpen = false;
 	export let id: number;
@@ -16,6 +17,7 @@
 		getJadwalApi.scheduleByDay($emailLogged, hari).then((resp) => {
 			$jadwal[dayInToEn(hari) as Day] = resp;
 		});
+		toast.success('Mata Kuliah berhasil dihapus');
 		closeModal();
 	};
 </script>
