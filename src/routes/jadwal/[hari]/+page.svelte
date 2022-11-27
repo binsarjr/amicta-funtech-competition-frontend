@@ -20,7 +20,7 @@
 	$: matkul = $jadwal[day] || [];
 	const tambahMatkul = () => openModal(TambahMataKuliah);
 	const editMatkul = (id: number, matkul: string) => openModal(EditMataKuliah, { id, matkul });
-	const hapusMatkul = (id: number) => openModal(HapusMataKuliah, { id });
+	const hapusMatkul = (id: number, matkul: string) => openModal(HapusMataKuliah, { id, matkul });
 	onMount(async () => {
 		$jadwal[day] = await getJadwalApi.scheduleByDay($emailLogged, hari);
 	});
@@ -61,7 +61,7 @@
 						<span
 							class="cursor-pointer"
 							data-cy="card-item-delete"
-							on:click={() => hapusMatkul(item.id)}
+							on:click={() => hapusMatkul(item.id, item.title)}
 						>
 							<CardItemDelete />
 						</span>

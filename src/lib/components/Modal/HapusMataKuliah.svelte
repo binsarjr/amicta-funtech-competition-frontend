@@ -11,6 +11,7 @@
 	// provided by Modals
 	export let isOpen = false;
 	export let id: number;
+	export let matkul: string;
 	const remove = async () => {
 		const hari = $page.params.hari as string;
 		await getJadwalApi.removeSchedule($emailLogged, id);
@@ -31,7 +32,7 @@
 				</div>
 			</div>
 			<h3 class="text-xl font-semibold mt-[62px]">Hapus Mata Kuliah</h3>
-			<p class="text-gray-500 mt-[5px]">Apakah anda yakin menghapus mata kuliah Statistika?</p>
+			<p class="text-gray-500 mt-[5px]">Apakah anda yakin menghapus mata kuliah {matkul}?</p>
 			<div class="mt-[34px]">
 				<div class="flex gap-[17px] justify-center items-center">
 					<button

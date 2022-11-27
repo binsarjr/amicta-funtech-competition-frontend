@@ -3,7 +3,10 @@
 </script>
 
 <main class="bg-[#3A0B48]">
-	<div class="w-3/4 mx-auto text-white py-[32px] text-center flex justify-between items-center">
+	<div
+		class="w-3/4 mx-auto text-white py-[32px] text-center flex justify-center items-center"
+		class:justify-between={$logged}
+	>
 		<a href="/jadwal" class="font-bold text-2xl">GetJadwal</a>
 		{#if $logged}
 			<a
