@@ -1,18 +1,12 @@
-<script>
+<script lang="ts">
 	import CardDay from '$lib/components/CardDay.svelte';
-	import CardDayContent from '$lib/components/CardDayContent.svelte';
 	import BuatJadwalKuliah from '$lib/components/Modal/BuatJadwalKuliah.svelte';
+	import getJadwalApi from '$lib/getJadwalApi';
+	import { emailLogged } from '$lib/store/preferences';
 	import { openModal } from 'svelte-modals';
-	// import { getContext } from 'svelte';
-	let jadwalMatkul = {
-		senin: ['Bahasa Inggris'],
-		selasa: [],
-		rabu: ['Bahasa Inggris', 'Web Programming', 'Data science'],
-		kamis: [],
-		jumat: []
-	};
+	import { jadwal } from '../../lib/store/jadwal';
+	getJadwalApi.allSchedule($emailLogged).then((d) => ($jadwal = d));
 
-	// const { open } = getContext('simple-modal');
 	const buatJadwal = () => openModal(BuatJadwalKuliah);
 </script>
 
@@ -26,10 +20,10 @@
 		>
 	</div>
 	<div class="grid grid-cols-5 gap-[16px] mt-[45px]">
-		<CardDay title="Senin" jadwalMatkul={jadwalMatkul.senin} />
-		<CardDay title="Selasa" jadwalMatkul={jadwalMatkul.selasa} />
-		<CardDay title="Rabu" jadwalMatkul={jadwalMatkul.rabu} />
-		<CardDay title="Kamis" jadwalMatkul={jadwalMatkul.kamis} />
-		<CardDay title="Jumat" jadwalMatkul={jadwalMatkul.jumat} />
+		<CardDay title="Senin" jadwalMatkul={$jadwal.monday} />
+		<CardDay title="Selasa" jadwalMatkul={$jadwal.tuesday} />
+		<CardDay title="Rabu" jadwalMatkul={$jadwal.wednesday} />
+		<CardDay title="Kamis" jadwalMatkul={$jadwal.thursday} />
+		<CardDay title="Jumat" jadwalMatkul={$jadwal.friday} />
 	</div>
 </main>

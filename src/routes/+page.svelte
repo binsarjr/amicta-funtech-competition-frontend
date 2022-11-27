@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import getJadwalApi from '../lib/getJadwalApi';
 	import { emailLogged, logged } from '../lib/store/preferences';
 	import { validateEmail } from '../lib/utils';
+	if ($logged && $emailLogged) goto('jadwal');
 
 	let email = '';
 	let invalidEmail = false;
@@ -10,11 +12,14 @@
 		invalidEmail = !validateEmail(email);
 	}
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		if (validateEmail(email)) {
-			$logged = true;
-			$emailLogged = email;
-			goto('jadwal');
+			const resp = await getJadwalApi.checkin(email);
+			if (resp.status === 'Success') {
+				$logged = true;
+				$emailLogged = resp.data.email;
+				goto('jadwal');
+			}
 		}
 	};
 </script>

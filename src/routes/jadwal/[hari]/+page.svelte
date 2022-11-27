@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import TodoEmptyState from '../../../lib/assets/todo-empty-state.svg';
 	import CardItemDelete from '../../../lib/assets/card-item-delete.svg';
@@ -8,9 +8,16 @@
 	import TambahMataKuliah from '$lib/components/Modal/TambahMataKuliah.svelte';
 	import EditMataKuliah from '$lib/components/Modal/EditMataKuliah.svelte';
 	import HapusMataKuliah from '$lib/components/Modal/HapusMataKuliah.svelte';
-	let hari = $page.params.hari;
+	import { onMount } from 'svelte';
+	import getJadwalApi from '../../../lib/getJadwalApi';
+	import { emailLogged } from '../../../lib/store/preferences';
+	import type { ScheduleDay } from '../../../types';
+	let hari = $page.params.hari as string;
 
-	let matkul = ['Statistika', 'Web Programming'];
+	let matkul: ScheduleDay[] = [];
+	onMount(async () => {
+		matkul = await getJadwalApi.scheduleByDay($emailLogged, hari);
+	});
 	const tambahMatkul = () => openModal(TambahMataKuliah);
 	const editMatkul = () => openModal(EditMataKuliah);
 	const hapusMatkul = () => openModal(HapusMataKuliah);
@@ -37,7 +44,7 @@
 					class="flex items-center justify-between py-[25px] px-[32px] rounded-lg bg-white"
 					data-cy="card-item"
 				>
-					<h3 data-cy="card-item-title">{item}</h3>
+					<h3 data-cy="card-item-title">{item.title}</h3>
 					<div class="flex gap-[20px]">
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<span class="cursor-pointer" data-cy="card-item-edit" on:click={editMatkul}>

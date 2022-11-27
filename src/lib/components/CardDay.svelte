@@ -1,8 +1,10 @@
 <script lang="ts">
+	import type { ScheduleDay } from '../../types';
 	import CardDayContent from './CardDayContent.svelte';
 
 	export let title: string;
-	export let jadwalMatkul: string[];
+	export let jadwalMatkul: ScheduleDay[];
+	$: matkul = jadwalMatkul.map((j) => j.title);
 </script>
 
 <div>
@@ -17,6 +19,6 @@
 				{/if}
 			</div>
 		</div>
-		<CardDayContent matkul={jadwalMatkul} />
+		<CardDayContent {matkul} />
 	</a>
 </div>
