@@ -1,11 +1,16 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import CardDay from '$lib/components/CardDay.svelte';
 	import BuatJadwalKuliah from '$lib/components/Modal/BuatJadwalKuliah.svelte';
 	import getJadwalApi from '$lib/getJadwalApi';
 	import { emailLogged } from '$lib/store/preferences';
+	import { onMount } from 'svelte';
 	import { openModal } from 'svelte-modals';
 	import { jadwal } from '../../lib/store/jadwal';
-	getJadwalApi.allSchedule($emailLogged).then((d) => ($jadwal = d));
+
+	onMount(async () => {
+		$jadwal = await getJadwalApi.allSchedule($emailLogged);
+	});
 
 	const buatJadwal = () => openModal(BuatJadwalKuliah);
 </script>

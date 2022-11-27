@@ -61,6 +61,11 @@ class GetJadwalApi {
         const respjson: IStandarResponse<ScheduleDay[]> = await resp.json()
         return respjson.data
     }
+    removeSchedule = async (email: string, id: number) => {
+        await fetch(`${this.base_endpoint}/schedule?email=${email}&id=${id}`, {
+            method: "DELETE",
+        })
+    }
 }
 
 const getJadwalApi = new GetJadwalApi()

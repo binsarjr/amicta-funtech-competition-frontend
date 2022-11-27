@@ -3,7 +3,7 @@
 	import CardDayContent from './CardDayContent.svelte';
 
 	export let title: string;
-	export let jadwalMatkul: ScheduleDay[];
+	export let jadwalMatkul: ScheduleDay[] = [];
 	$: matkul = jadwalMatkul.map((j) => j.title);
 </script>
 

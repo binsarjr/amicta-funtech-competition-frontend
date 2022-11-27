@@ -2,8 +2,22 @@
 	import { fly } from 'svelte/transition';
 	import TrashSvg from '../../assets/todo-item-delete-button.svg';
 	import { closeModal } from 'svelte-modals';
+	import getJadwalApi, { dayInToEn } from '../../getJadwalApi';
+	import { emailLogged } from '../../store/preferences';
+	import { page } from '$app/stores';
+	import { jadwal } from '../../store/jadwal';
+	import type { Day } from '../../../types';
 	// provided by Modals
 	export let isOpen = false;
+	export let id: number;
+	const remove = async () => {
+		const hari = $page.params.hari as string;
+		await getJadwalApi.removeSchedule($emailLogged, id);
+		getJadwalApi.scheduleByDay($emailLogged, hari).then((resp) => {
+			$jadwal[dayInToEn(hari) as Day] = resp;
+		});
+		closeModal();
+	};
 </script>
 
 {#if isOpen}
@@ -26,7 +40,7 @@
 						>Batal</button
 					>
 					<button
-						on:click={closeModal}
+						on:click={remove}
 						data-cy="btn-submit"
 						type="button"
 						class="px-[34px] py-[12px] rounded-full font-medium text-white bg-[#ED4C5C]"

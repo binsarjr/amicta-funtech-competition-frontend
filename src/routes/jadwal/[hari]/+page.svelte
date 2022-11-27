@@ -16,10 +16,11 @@
 	getJadwalApi
 		.scheduleByDay($emailLogged, hari)
 		.then((resp) => ($jadwal[dayInToEn(hari) as Day] = resp));
+	let matkul: ScheduleDay[] = [];
 	$: matkul = $jadwal[dayInToEn(hari) as Day];
 	const tambahMatkul = () => openModal(TambahMataKuliah);
 	const editMatkul = () => openModal(EditMataKuliah);
-	const hapusMatkul = () => openModal(HapusMataKuliah);
+	const hapusMatkul = (id: number) => openModal(HapusMataKuliah, { id });
 </script>
 
 <main>
@@ -49,7 +50,12 @@
 						<span class="cursor-pointer" data-cy="card-item-edit" on:click={editMatkul}>
 							<CardItemEdit />
 						</span>
-						<span class="cursor-pointer" data-cy="card-item-delete" on:click={hapusMatkul}>
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<span
+							class="cursor-pointer"
+							data-cy="card-item-delete"
+							on:click={() => hapusMatkul(item.id)}
+						>
 							<CardItemDelete />
 						</span>
 					</div>
