@@ -26,17 +26,10 @@
 		>
 	</div>
 	<div class="grid grid-cols-5 gap-[16px] mt-[45px]">
-		<CardDay title="Senin" totalMatkul={jadwalMatkul.senin.length} />
-		<CardDay title="Selasa" totalMatkul={jadwalMatkul.selasa.length} />
-		<CardDay title="Rabu" totalMatkul={jadwalMatkul.rabu.length} />
-		<CardDay title="Kamis" totalMatkul={jadwalMatkul.kamis.length} />
-		<CardDay title="Jumat" totalMatkul={jadwalMatkul.jumat.length} />
-	</div>
-	<div class="grid grid-cols-5 gap-[16px] mt-[24px]">
-		<CardDayContent matkul={jadwalMatkul.senin} />
-		<CardDayContent matkul={jadwalMatkul.selasa} />
-		<CardDayContent matkul={jadwalMatkul.rabu} />
-		<CardDayContent matkul={jadwalMatkul.kamis} />
-		<CardDayContent matkul={jadwalMatkul.jumat} />
+		<CardDay title="Senin" jadwalMatkul={jadwalMatkul.senin} />
+		<CardDay title="Selasa" jadwalMatkul={jadwalMatkul.selasa} />
+		<CardDay title="Rabu" jadwalMatkul={jadwalMatkul.rabu} />
+		<CardDay title="Kamis" jadwalMatkul={jadwalMatkul.kamis} />
+		<CardDay title="Jumat" jadwalMatkul={jadwalMatkul.jumat} />
 	</div>
 </main>

@@ -1,19 +1,22 @@
 <script lang="ts">
+	import CardDayContent from './CardDayContent.svelte';
+
 	export let title: string;
-	export let totalMatkul = 0;
+	export let jadwalMatkul: string[];
 </script>
 
-<a
-	href="/jadwal/{title}"
-	class="bg-white rounded-lg py-[20px] px-[22px] shadow-lg"
-	data-cy="card-day"
->
-	<h2 class="text-xl font-semibold mb-[6px]" data-cy="card-title-{title}">{title}</h2>
-	<div data-cy="card-desc-{title}">
-		{#if totalMatkul}
-			<p class="text-[#D9019C] text-[12px]">{totalMatkul} Mata Kuliah</p>
-		{:else}
-			<p class="text-gray-500 text-[12px]">Belum ada mata kuliah</p>
-		{/if}
-	</div>
-</a>
+<div>
+	<a href="/jadwal/{title}" class="flex flex-col gap-[16px]">
+		<div class="bg-white rounded-lg py-[20px] px-[22px] shadow-lg block w-full" data-cy="card-day">
+			<h2 class="text-xl font-semibold mb-[6px]" data-cy="card-title-{title}">{title}</h2>
+			<div data-cy="card-desc-{title}">
+				{#if jadwalMatkul.length}
+					<p class="text-[#D9019C] text-[12px]">{jadwalMatkul.length} Mata Kuliah</p>
+				{:else}
+					<p class="text-gray-500 text-[12px]">Belum ada mata kuliah</p>
+				{/if}
+			</div>
+		</div>
+		<CardDayContent matkul={jadwalMatkul} />
+	</a>
+</div>
