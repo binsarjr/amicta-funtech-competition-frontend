@@ -19,6 +19,6 @@
 				{/if}
 			</div>
 		</div>
-		<CardDayContent {matkul} />
+		<CardDayContent {matkul} {title} />
 	</a>
 </div>
