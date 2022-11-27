@@ -1,12 +1,22 @@
 <script lang="ts">
 	import ModalWrapper from './ModalWrapper.svelte';
 	import { closeModal } from 'svelte-modals';
+	import { page } from '$app/stores';
+	import getJadwalApi, { dayInToEn } from '../../getJadwalApi';
+	import { emailLogged } from '../../store/preferences';
+	import { jadwal } from '../../store/jadwal';
+	import type { Day } from '../../../types';
 	// provided by Modals
 	export let isOpen = false;
+	export let id: number;
+	export let matkul = '';
 
-	let matkul = '';
-
-	const onSubmit = () => {
+	const onSubmit = async () => {
+		const hari = $page.params.hari as string;
+		await getJadwalApi.updateSchedule($emailLogged, id, matkul);
+		getJadwalApi.scheduleByDay($emailLogged, hari).then((resp) => {
+			$jadwal[dayInToEn(hari) as Day] = resp;
+		});
 		closeModal();
 	};
 </script>

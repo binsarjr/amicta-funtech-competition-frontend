@@ -12,15 +12,18 @@
 	import type { Day, ScheduleDay } from '../../../types';
 	import { jadwal } from '../../../lib/store/jadwal';
 	import { emailLogged } from '../../../lib/store/preferences';
+	import { onMount } from 'svelte';
 	let hari = $page.params.hari as string;
-	getJadwalApi
-		.scheduleByDay($emailLogged, hari)
-		.then((resp) => ($jadwal[dayInToEn(hari) as Day] = resp));
+	let day = dayInToEn(hari) as Day;
+
 	let matkul: ScheduleDay[] = [];
-	$: matkul = $jadwal[dayInToEn(hari) as Day];
+	$: matkul = $jadwal[day] || [];
 	const tambahMatkul = () => openModal(TambahMataKuliah);
-	const editMatkul = () => openModal(EditMataKuliah);
+	const editMatkul = (id: number, matkul: string) => openModal(EditMataKuliah, { id, matkul });
 	const hapusMatkul = (id: number) => openModal(HapusMataKuliah, { id });
+	onMount(async () => {
+		$jadwal[day] = await getJadwalApi.scheduleByDay($emailLogged, hari);
+	});
 </script>
 
 <main>
@@ -47,7 +50,11 @@
 					<h3 data-cy="card-item-title">{item.title}</h3>
 					<div class="flex gap-[20px]">
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<span class="cursor-pointer" data-cy="card-item-edit" on:click={editMatkul}>
+						<span
+							class="cursor-pointer"
+							data-cy="card-item-edit"
+							on:click={() => editMatkul(item.id, item.title)}
+						>
 							<CardItemEdit />
 						</span>
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
