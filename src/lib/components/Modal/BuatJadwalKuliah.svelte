@@ -2,14 +2,27 @@
 	import { fade, fly } from 'svelte/transition';
 	import ModalWrapper from './ModalWrapper.svelte';
 	import { closeModal } from 'svelte-modals';
+	import getJadwalApi, { dayInToEn } from '../../getJadwalApi';
+	import { emailLogged } from '../../store/preferences';
+	import { jadwal } from '../../store/jadwal';
+	import type { Day } from '../../../types';
 	// provided by Modals
 	export let isOpen = false;
 
 	let matkul = '';
-	let hari: any;
+	let hari: string;
 
-	const onSubmit = () => {
-		closeModal();
+	const onSubmit = async () => {
+		if (matkul && hari) {
+			let day = dayInToEn(hari) as Day;
+			const resp = await getJadwalApi.addSchedule($emailLogged, matkul, day);
+			if (resp.status === 'Success') {
+				getJadwalApi.scheduleByDay($emailLogged, day).then((resp) => {
+					$jadwal[day] = resp;
+				});
+				closeModal();
+			}
+		}
 	};
 </script>
 

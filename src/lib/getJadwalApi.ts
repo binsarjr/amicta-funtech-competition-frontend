@@ -1,6 +1,6 @@
 import type { Day, IStandarResponse, ScheduleDay } from "../types";
 
-const dayInToEn = (day: string) => {
+export const dayInToEn = (day: string) => {
     day = day.toLowerCase()
     const days: { [i: string]: string } = {
         senin: 'monday',
@@ -43,6 +43,16 @@ class GetJadwalApi {
         ])
 
         return { monday, tuesday, wednesday, thursday, friday }
+    }
+    addSchedule = async (email: string, title: string, day: string) => {
+        day = dayInToEn(day)
+        const resp = await fetch(`${this.base_endpoint}/schedule?email=${email}`, {
+            method: "POST",
+            headers: this.headers,
+            body: JSON.stringify({ title, day })
+        })
+        const respjson: IStandarResponse<ScheduleDay> = await resp.json()
+        return respjson
     }
 
     scheduleByDay = async (email: string, day: string) => {

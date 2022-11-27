@@ -8,16 +8,15 @@
 	import TambahMataKuliah from '$lib/components/Modal/TambahMataKuliah.svelte';
 	import EditMataKuliah from '$lib/components/Modal/EditMataKuliah.svelte';
 	import HapusMataKuliah from '$lib/components/Modal/HapusMataKuliah.svelte';
-	import { onMount } from 'svelte';
-	import getJadwalApi from '../../../lib/getJadwalApi';
+	import getJadwalApi, { dayInToEn } from '../../../lib/getJadwalApi';
+	import type { Day, ScheduleDay } from '../../../types';
+	import { jadwal } from '../../../lib/store/jadwal';
 	import { emailLogged } from '../../../lib/store/preferences';
-	import type { ScheduleDay } from '../../../types';
 	let hari = $page.params.hari as string;
-
-	let matkul: ScheduleDay[] = [];
-	onMount(async () => {
-		matkul = await getJadwalApi.scheduleByDay($emailLogged, hari);
-	});
+	getJadwalApi
+		.scheduleByDay($emailLogged, hari)
+		.then((resp) => ($jadwal[dayInToEn(hari) as Day] = resp));
+	$: matkul = $jadwal[dayInToEn(hari) as Day];
 	const tambahMatkul = () => openModal(TambahMataKuliah);
 	const editMatkul = () => openModal(EditMataKuliah);
 	const hapusMatkul = () => openModal(HapusMataKuliah);
@@ -56,7 +55,8 @@
 					</div>
 				</div>
 			{:else}
-				<div data-cy="todo-empty-state">
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div data-cy="todo-empty-state" on:click={tambahMatkul} class="cursor-pointer">
 					<TodoEmptyState class="mx-auto" />
 				</div>
 			{/each}
