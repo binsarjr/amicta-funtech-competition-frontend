@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable } from 'svelte-local-storage-store'
 
-export const logged = writable(false)
-export const emailLogged = writable('')
+export const logged = writable('logged', false)
+export const emailLogged = writable('emailLogged', '')
