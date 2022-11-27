@@ -24,6 +24,10 @@
 	};
 </script>
 
+<svelte:head>
+	<link rel="prefetch prerender" href="/jadwal" />
+</svelte:head>
+
 <main class="bg-white rounded-lg shadow-lg mx-auto w-[491px] px-[65px] py-[48px] mt-[54px]">
 	<div>
 		<h1 class="font-semibold text-center text-xl" data-cy="text-login">Check In</h1>
