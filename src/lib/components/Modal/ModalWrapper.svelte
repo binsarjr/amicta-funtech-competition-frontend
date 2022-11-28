@@ -4,10 +4,11 @@
 	// provided by Modals
 	export let isOpen = false;
 	export let title: string;
+	export let dataCy = 'form-add';
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal"  data-cy="form-add">
+	<div role="dialog" class="modal" data-cy={dataCy}>
 		<div class="contents w-1/2">
 			<div class="border-b-2 p-[16px] pb-[14px] flex justify-between items-center">
 				<h1 class="text-xl font-semibold">{title}</h1>

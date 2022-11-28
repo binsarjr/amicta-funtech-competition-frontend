@@ -24,7 +24,7 @@
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal" data-cy="form-add">
+	<div role="dialog" class="modal" data-cy="form-delete">
 		<div class="contents p-[32px] text-center">
 			<div class="flex items-center justify-center">
 				<div class="bg-[#ED4C5C] rounded-full p-[20px]">

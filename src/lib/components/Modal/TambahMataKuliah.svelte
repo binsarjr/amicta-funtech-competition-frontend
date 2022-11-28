@@ -23,7 +23,7 @@
 	};
 </script>
 
-<ModalWrapper {isOpen} title="Tambah Mata Kuliah">
+<ModalWrapper {isOpen} title="Tambah Mata Kuliah" dataCy="detail-form">
 	<!-- Content -->
 	<form slot="content" class="flex flex-col gap-[23px]" on:submit|preventDefault={onSubmit}>
 		<div>
