@@ -13,7 +13,7 @@
 				href="/checkout"
 				data-cy="btn-logout"
 				class="text-white bg-[#D9019C] font-bold py-[10px] px-[16px] rounded"
-				>Check Out | {$emailLogged}</a
+				>Check out | {$emailLogged}</a
 			>
 		{/if}
 	</div>

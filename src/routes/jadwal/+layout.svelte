@@ -5,7 +5,7 @@
 
 <Modals>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div slot="backdrop" class="backdrop" on:click={closeModal} transition:fade />
+	<div slot="backdrop" class="backdrop" on:click={closeModal} />
 </Modals>
 <main class="w-3/4 mx-auto my-[57px]">
 	<slot />

@@ -7,7 +7,7 @@
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal" transition:fly={{ y: 20 }} data-cy="form-add">
+	<div role="dialog" class="modal"  data-cy="form-add">
 		<div class="contents w-1/2">
 			<div class="border-b-2 p-[16px] pb-[14px] flex justify-between items-center">
 				<h1 class="text-xl font-semibold">{title}</h1>

@@ -44,7 +44,7 @@
 				placeholder="Masukkan email anda"
 			/>
 			{#if invalidEmail}
-				<div class="flex gap-[8px] items-center mt-[7px]">
+				<div class="flex gap-[8px] items-center mt-[7px]" data-cy="error-email">
 					<svg
 						width="16"
 						height="16"
