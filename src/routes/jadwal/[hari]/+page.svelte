@@ -17,12 +17,14 @@
 	let day = dayInToEn(hari) as Day;
 
 	let matkul: ScheduleDay[] = [];
-	$: matkul = $jadwal[day] || [];
+	let mounted = false;
+	$: if (mounted) matkul = $jadwal[day] || [];
 	const tambahMatkul = () => openModal(TambahMataKuliah);
 	const editMatkul = (id: number, matkul: string) => openModal(EditMataKuliah, { id, matkul });
 	const hapusMatkul = (id: number, matkul: string) => openModal(HapusMataKuliah, { id, matkul });
 	onMount(async () => {
 		$jadwal[day] = await getJadwalApi.scheduleByDay($emailLogged, hari);
+		mounted = true;
 	});
 </script>
 
@@ -69,8 +71,8 @@
 				</div>
 			{:else}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div data-cy="todo-empty-state" on:click={tambahMatkul} class="cursor-pointer">
-					<TodoEmptyState class="mx-auto" />
+				<div on:click={tambahMatkul} class="cursor-pointer">
+					<img src="/assets/todo-empty-state.svg" alt="" data-cy="todo-empty-state" class="mx-auto">
 				</div>
 			{/each}
 		</div>

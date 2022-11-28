@@ -24,7 +24,7 @@
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal" data-cy="form-delete">
+	<form role="dialog" class="modal" data-cy="form-delete" on:submit|preventDefault={remove}>
 		<div class="contents p-[32px] text-center">
 			<div class="flex items-center justify-center">
 				<div class="bg-[#ED4C5C] rounded-full p-[20px]">
@@ -43,16 +43,14 @@
 						>Batal</button
 					>
 					<button
-						on:click={remove}
 						data-cy="btn-submit"
-						type="button"
 						class="px-[34px] py-[12px] rounded-full font-medium text-white bg-[#ED4C5C]"
 						>Hapus</button
 					>
 				</div>
 			</div>
 		</div>
-	</div>
+	</>
 {/if}
 
 <style>

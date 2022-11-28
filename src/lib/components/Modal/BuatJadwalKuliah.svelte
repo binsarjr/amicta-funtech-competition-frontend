@@ -26,9 +26,9 @@
 	};
 </script>
 
-<ModalWrapper {isOpen} title="Buat Jadwal Kuliah">
+<ModalWrapper {isOpen} title="Buat Jadwal Kuliah" dataCy="form-add" {onSubmit}>
 	<!-- Content -->
-	<form slot="content" class="flex flex-col gap-[23px]" on:submit|preventDefault={onSubmit}>
+	<div slot="content" class="flex flex-col gap-[23px]">
 		<div>
 			<label for="matakuliah" class="font-medium mb-[6px]">Mata Kuliah</label>
 			<input
@@ -56,12 +56,11 @@
 				{/each}
 			</select>
 		</div>
-	</form>
+	</div>
 	<!-- Footer -->
 	<div class="flex justify-end" slot="footer">
 		<button
 			data-cy="btn-submit"
-			on:click={onSubmit}
 			class="py-[13px] px-[24px] rounded-full bg-[#D9019C] text-white font-medium disabled:opacity-50"
 			disabled={!matkul || !hari}>Simpan</button
 		>

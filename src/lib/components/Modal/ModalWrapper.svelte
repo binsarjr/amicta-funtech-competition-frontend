@@ -5,10 +5,11 @@
 	export let isOpen = false;
 	export let title: string;
 	export let dataCy = 'form-add';
+	export let onSubmit: any;
 </script>
 
 {#if isOpen}
-	<div role="dialog" class="modal" data-cy={dataCy}>
+	<form role="dialog" class="modal" data-cy={dataCy} on:submit|preventDefault={onSubmit}>
 		<div class="contents w-1/2">
 			<div class="border-b-2 p-[16px] pb-[14px] flex justify-between items-center">
 				<h1 class="text-xl font-semibold">{title}</h1>
@@ -44,7 +45,7 @@
 				<slot name="footer" />
 			</div>
 		</div>
-	</div>
+	</form>
 {/if}
 
 <style>
