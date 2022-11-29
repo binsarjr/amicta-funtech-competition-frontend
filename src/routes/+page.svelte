@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import getJadwalApi from '../lib/getJadwalApi';
+	import { jadwal } from '../lib/store/jadwal';
 	import { emailLogged, logged } from '../lib/store/preferences';
 	import { validateEmail } from '../lib/utils';
 	if ($logged && $emailLogged) goto('jadwal');
@@ -18,6 +19,7 @@
 			if (resp.status === 'Success') {
 				$logged = true;
 				$emailLogged = resp.data.email;
+				$jadwal = await getJadwalApi.allSchedule($emailLogged);
 				goto('jadwal');
 			}
 		}
@@ -26,6 +28,7 @@
 
 <svelte:head>
 	<link rel="prefetch prerender" href="/jadwal" />
+	<title>Check In</title>
 </svelte:head>
 
 <main class="bg-white rounded-lg shadow-lg mx-auto w-[491px] px-[65px] py-[48px] mt-[54px]">
@@ -63,7 +66,7 @@
 			{/if}
 			<button
 				data-cy="btn-login"
-				class="py-[12px] px-[15px] rounded-full bg-[#D9019C] text-white w-full disabled:opacity-50 mt-[22px]"
+				class="py-[12px] px-[15px] rounded-full bg-[#D9019C] text-white w-full mt-[22px] disabled:opacity-50"
 				disabled={invalidEmail || !email}>Mulai Sesi</button
 			>
 		</form>

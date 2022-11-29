@@ -27,6 +27,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Jadwal Hari {hari}</title>
+</svelte:head>
 <main>
 	<div class="flex justify-between border-b-2 border-gray-400 items-center pb-[30px]">
 		<div>

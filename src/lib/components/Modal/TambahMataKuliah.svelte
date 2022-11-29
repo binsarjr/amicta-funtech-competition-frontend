@@ -12,13 +12,15 @@
 	let matkul = '';
 
 	const onSubmit = async () => {
-		let day = dayInToEn($page.params.hari) as Day;
-		const resp = await getJadwalApi.addSchedule($emailLogged, matkul, day);
-		if (resp.status === 'Success') {
-			getJadwalApi.scheduleByDay($emailLogged, day).then((resp) => {
-				$jadwal[day] = resp;
-			});
-			closeModal();
+		if (matkul) {
+			let day = dayInToEn($page.params.hari) as Day;
+			const resp = await getJadwalApi.addSchedule($emailLogged, matkul, day);
+			if (resp.status === 'Success') {
+				getJadwalApi.scheduleByDay($emailLogged, day).then((resp) => {
+					$jadwal[day] = resp;
+				});
+				closeModal();
+			}
 		}
 	};
 </script>
@@ -43,7 +45,8 @@
 		<button
 			data-cy="btn-submit"
 			class="py-[13px] px-[24px] rounded-full bg-[#D9019C] text-white font-medium disabled:opacity-50"
-			disabled={!matkul}>Simpan</button
+			disabled={!matkul}
+			class:cursor-not-allowed={!matkul}>Simpan</button
 		>
 	</div>
 </ModalWrapper>

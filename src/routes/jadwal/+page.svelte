@@ -15,6 +15,9 @@
 	const buatJadwal = () => openModal(BuatJadwalKuliah);
 </script>
 
+<svelte:head>
+	<title>Jadwal</title>
+</svelte:head>
 <main>
 	<div class="flex justify-end">
 		<button

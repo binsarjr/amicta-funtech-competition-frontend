@@ -79,19 +79,6 @@
 					</ul>
 				{/if}
 			</div>
-			<!-- <select
-				bind:value={hari}
-				data-cy="form-day"
-				id="hari"
-				type="text"
-				class="w-full py-[12px] px-[15px] border bg-white"
-				placeholder="Masukkan Mata Kuliah"
-			>
-				<option selected disabled value="">Pilih Hari</option>
-				{#each ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as item}
-					<option value={dayInToEn(item)}>{item}</option>
-				{/each}
-			</select> -->
 		</div>
 	</div>
 	<!-- Footer -->

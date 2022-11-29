@@ -12,12 +12,14 @@
 	export let matkul = '';
 
 	const onSubmit = async () => {
-		const hari = $page.params.hari as string;
-		await getJadwalApi.updateSchedule($emailLogged, id, matkul);
-		getJadwalApi.scheduleByDay($emailLogged, hari).then((resp) => {
-			$jadwal[dayInToEn(hari) as Day] = resp;
-		});
-		closeModal();
+		if (matkul) {
+			const hari = $page.params.hari as string;
+			await getJadwalApi.updateSchedule($emailLogged, id, matkul);
+			getJadwalApi.scheduleByDay($emailLogged, hari).then((resp) => {
+				$jadwal[dayInToEn(hari) as Day] = resp;
+			});
+			closeModal();
+		}
 	};
 </script>
 
