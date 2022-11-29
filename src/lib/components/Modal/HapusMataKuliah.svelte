@@ -8,6 +8,7 @@
 	import { jadwal } from '../../store/jadwal';
 	import type { Day } from '../../../types';
 	import toast from 'svelte-french-toast';
+	import { clickOutside } from '../../actions/clickOutSide';
 	// provided by Modals
 	export let isOpen = false;
 	export let id: number;
@@ -24,33 +25,42 @@
 </script>
 
 {#if isOpen}
-	<form role="dialog" class="modal" data-cy="form-delete" on:submit|preventDefault={remove}>
-		<div class="contents p-[32px] text-center">
-			<div class="flex items-center justify-center">
-				<div class="bg-[#ED4C5C] rounded-full p-[20px]">
-					<TrashSvg />
+	<div class="backdrop">
+		<form
+			role="dialog"
+			class="modal"
+			data-cy="form-delete"
+			on:submit|preventDefault={remove}
+			use:clickOutside
+			on:click_outside={closeModal}
+		>
+			<div class="contents p-[32px] text-center">
+				<div class="flex items-center justify-center">
+					<div class="bg-[#ED4C5C] rounded-full p-[20px]">
+						<TrashSvg />
+					</div>
+				</div>
+				<h3 class="text-xl font-semibold mt-[62px]">Hapus Mata Kuliah</h3>
+				<p class="text-gray-500 mt-[5px]">Apakah anda yakin menghapus mata kuliah {matkul}?</p>
+				<div class="mt-[34px]">
+					<div class="flex gap-[17px] justify-center items-center">
+						<button
+							on:click={closeModal}
+							data-cy="btn-close"
+							type="button"
+							class="px-[34px] py-[12px] rounded-full font-medium text-gray-500 bg-gray-200"
+							>Batal</button
+						>
+						<button
+							data-cy="btn-submit"
+							class="px-[34px] py-[12px] rounded-full font-medium text-white bg-[#ED4C5C]"
+							>Hapus</button
+						>
+					</div>
 				</div>
 			</div>
-			<h3 class="text-xl font-semibold mt-[62px]">Hapus Mata Kuliah</h3>
-			<p class="text-gray-500 mt-[5px]">Apakah anda yakin menghapus mata kuliah {matkul}?</p>
-			<div class="mt-[34px]">
-				<div class="flex gap-[17px] justify-center items-center">
-					<button
-						on:click={closeModal}
-						data-cy="btn-close"
-						type="button"
-						class="px-[34px] py-[12px] rounded-full font-medium text-gray-500 bg-gray-200"
-						>Batal</button
-					>
-					<button
-						data-cy="btn-submit"
-						class="px-[34px] py-[12px] rounded-full font-medium text-white bg-[#ED4C5C]"
-						>Hapus</button
-					>
-				</div>
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 {/if}
 
 <style>
@@ -76,5 +86,13 @@
 		flex-direction: column;
 		justify-content: space-between;
 		pointer-events: auto;
+	}
+	.backdrop {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.5);
 	}
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import { closeModal } from 'svelte-modals';
+	import { clickOutside } from '../../actions/clickOutSide';
 	// provided by Modals
 	export let isOpen = false;
 	export let title: string;
@@ -9,43 +10,52 @@
 </script>
 
 {#if isOpen}
-	<form role="dialog" class="modal" data-cy={dataCy} on:submit|preventDefault={onSubmit}>
-		<div class="contents w-1/2">
-			<div class="border-b-2 p-[16px] pb-[14px] flex justify-between items-center">
-				<h1 class="text-xl font-semibold">{title}</h1>
-				<button type="button" data-cy="close-modal" on:click={closeModal}>
-					<svg
-						width="15"
-						height="14"
-						viewBox="0 0 15 14"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M13.5 1L1.5 13"
-							stroke="#A4A4A4"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-						<path
-							d="M1.5 1L13.5 13"
-							stroke="#A4A4A4"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-					</svg>
-				</button>
+	<div class="backdrop">
+		<form
+			role="dialog"
+			class="modal"
+			data-cy={dataCy}
+			on:submit|preventDefault={onSubmit}
+			use:clickOutside
+			on:click_outside={closeModal}
+		>
+			<div class="contents w-1/2">
+				<div class="border-b-2 p-[16px] pb-[14px] flex justify-between items-center">
+					<h1 class="text-xl font-semibold">{title}</h1>
+					<button type="button" data-cy="close-modal" on:click={closeModal}>
+						<svg
+							width="15"
+							height="14"
+							viewBox="0 0 15 14"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M13.5 1L1.5 13"
+								stroke="#A4A4A4"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M1.5 1L13.5 13"
+								stroke="#A4A4A4"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
+				</div>
+				<div class="p-[16px] py-[24px]">
+					<slot name="content" />
+				</div>
+				<div class="p-[16px] border-t-2  pt-[24px] ">
+					<slot name="footer" />
+				</div>
 			</div>
-			<div class="p-[16px] py-[24px]">
-				<slot name="content" />
-			</div>
-			<div class="p-[16px] border-t-2  pt-[24px] ">
-				<slot name="footer" />
-			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 {/if}
 
 <style>
@@ -71,5 +81,13 @@
 		flex-direction: column;
 		justify-content: space-between;
 		pointer-events: auto;
+	}
+	.backdrop {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		background: rgba(0, 0, 0, 0.5);
 	}
 </style>
