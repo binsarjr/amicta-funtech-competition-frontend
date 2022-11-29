@@ -27,7 +27,6 @@
 </script>
 
 <svelte:head>
-	<link rel="prefetch prerender" href="/jadwal" />
 	<title>Check In</title>
 </svelte:head>
 
@@ -38,7 +37,8 @@
 			<label for="email" class="font-medium block mb-[7px]">Email</label>
 			<input
 				data-cy="input-email"
-				bind:value={email}
+				value={email}
+				on:input={(e) => (email = e.target.value)}
 				id="email"
 				type="email"
 				class="w-full py-[12px] px-[16px] rounded-lg border outline-none"
