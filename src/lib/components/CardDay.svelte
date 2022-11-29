@@ -4,8 +4,12 @@
 
 	export let title: string;
 	export let jadwalMatkul: ScheduleDay[] = [];
-	$: matkul = jadwalMatkul.map((j) => j.title);
 	$: desc = `${jadwalMatkul.length} Mata Kuliah`;
+	let descEl: HTMLElement;
+	$: if (descEl) {
+		descEl.textContent = desc;
+	}
+	$: matkul = jadwalMatkul.map((j) => j.title);
 </script>
 
 <div>
@@ -13,7 +17,7 @@
 		<div class="bg-white rounded-lg py-[20px] px-[22px] shadow-lg block w-full" data-cy="card-day">
 			<h2 class="text-xl font-semibold mb-[6px]" data-cy="card-title-{title}">{title}</h2>
 			{#if jadwalMatkul.length}
-				<p class="not_empty__kDILV" data-cy="card-desc-{title}">{@html desc}</p>
+				<p class="not_empty__kDILV" data-cy="card-desc-{title}" bind:this={descEl} />
 			{:else}
 				<p class="text-gray-500 text-[12px]" data-cy="card-desc-{title}">Belum ada mata kuliahh</p>
 			{/if}
