@@ -52,7 +52,7 @@
 			>
 				<option selected disabled value="">Pilih Hari</option>
 				{#each ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as item}
-					<option value={item}>{item}</option>
+					<option value={dayInToEn(item)}>{item}</option>
 				{/each}
 			</select>
 		</div>
