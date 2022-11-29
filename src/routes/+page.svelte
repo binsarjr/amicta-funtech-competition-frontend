@@ -19,7 +19,6 @@
 			if (resp.status === 'Success') {
 				$logged = true;
 				$emailLogged = resp.data.email;
-				$jadwal = await getJadwalApi.allSchedule($emailLogged);
 				goto('jadwal');
 			}
 		}
@@ -30,7 +29,7 @@
 	<title>Check In</title>
 </svelte:head>
 
-<main class="bg-white rounded-lg shadow-lg mx-auto w-[491px] px-[65px] py-[48px] mt-[54px]">
+<main class="bg-white rounded-lg shadow-lg mx-auto w-[90vw] md:w-[491px] px-[65px] py-[48px] mt-[54px]">
 	<div>
 		<h1 class="font-semibold text-center text-xl" data-cy="text-login">Check In</h1>
 		<form class="mt-[53px] w-full" on:submit|preventDefault={onSubmit}>
@@ -40,7 +39,7 @@
 				value={email}
 				on:input={(e) => (email = e.target.value)}
 				id="email"
-				type="email"
+				type="text"
 				class="w-full py-[12px] px-[16px] rounded-lg border outline-none"
 				class:bg-gray-100={!email}
 				class:border-[#ED4C5C]={invalidEmail}

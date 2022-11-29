@@ -4,13 +4,16 @@
 	import BuatJadwalKuliah from '$lib/components/Modal/BuatJadwalKuliah.svelte';
 	import getJadwalApi from '$lib/getJadwalApi';
 	import { emailLogged } from '$lib/store/preferences';
-	import { onMount } from 'svelte';
 	import { openModal } from 'svelte-modals';
 	import { jadwal } from '../../lib/store/jadwal';
 
-	onMount(async () => {
-		$jadwal = await getJadwalApi.allSchedule($emailLogged);
-	});
+	let mounted = false;
+	$: if (browser) {
+		(async () => {
+			$jadwal = await getJadwalApi.allSchedule($emailLogged);
+			mounted = true;
+		})();
+	}
 
 	const buatJadwal = () => openModal(BuatJadwalKuliah);
 </script>
@@ -27,11 +30,13 @@
 			data-cy="btn-create-schedule">+ Buat Jadwal Kuliah</button
 		>
 	</div>
-	<div class="grid grid-cols-5 gap-[16px] mt-[45px]">
-		<CardDay title="Senin" jadwalMatkul={$jadwal.monday} />
-		<CardDay title="Selasa" jadwalMatkul={$jadwal.tuesday} />
-		<CardDay title="Rabu" jadwalMatkul={$jadwal.wednesday} />
-		<CardDay title="Kamis" jadwalMatkul={$jadwal.thursday} />
-		<CardDay title="Jumat" jadwalMatkul={$jadwal.friday} />
-	</div>
+	{#if mounted}
+		<div class="grid md:grid-cols-3 lg:grid-cols-5 gap-[16px] mt-[45px]">
+			<CardDay title="Senin" jadwalMatkul={$jadwal.monday} />
+			<CardDay title="Selasa" jadwalMatkul={$jadwal.tuesday} />
+			<CardDay title="Rabu" jadwalMatkul={$jadwal.wednesday} />
+			<CardDay title="Kamis" jadwalMatkul={$jadwal.thursday} />
+			<CardDay title="Jumat" jadwalMatkul={$jadwal.friday} />
+		</div>
+	{/if}
 </main>
