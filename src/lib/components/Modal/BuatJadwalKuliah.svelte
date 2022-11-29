@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
 	import ModalWrapper from './ModalWrapper.svelte';
 	import { closeModal } from 'svelte-modals';
 	import getJadwalApi, { dayInToEn } from '../../getJadwalApi';
 	import { emailLogged } from '../../store/preferences';
 	import { jadwal } from '../../store/jadwal';
 	import type { Day } from '../../../types';
-	import { browser } from '$app/environment';
-	import { clickOutside } from '../../actions/clickOutSide';
 	// provided by Modals
 	export let isOpen = false;
 
